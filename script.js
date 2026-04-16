@@ -15,3 +15,17 @@ marker2.bindPopup("Plaza Independencia")
 
 var marker3 = L.marker([-37.32761825314754, -59.15236740327897]).addTo(map)
 marker3.bindPopup("Monte Calvario")
+
+var markerG = L.featureGroup().addTo(map)
+
+var markerC;
+
+map.on('click', function(e) {
+    if (markerC != null) {
+        markerG.clearLayers()
+        markerC = null;
+    }
+
+    markerC = L.marker([e.latlng.lat, e.latlng.lng]).addTo(markerG)
+    markerC.bindPopup(e.latlng.lat + ", " + e.latlng.lng)
+})
