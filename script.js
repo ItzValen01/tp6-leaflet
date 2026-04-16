@@ -18,7 +18,11 @@ marker3.bindPopup("Monte Calvario")
 
 var markerG = L.featureGroup().addTo(map)
 
-var markerC;
+var markerC
+
+var dibujo = L.featureGroup().addTo(map)
+
+let puntos = [];
 
 map.on('click', function(e) {
     if (markerC != null) {
@@ -28,4 +32,10 @@ map.on('click', function(e) {
 
     markerC = L.marker([e.latlng.lat, e.latlng.lng]).addTo(markerG)
     markerC.bindPopup(e.latlng.lat + ", " + e.latlng.lng)
+
+    puntos.push([e.latlng.lat, e.latlng.lng]);
+
+    if (puntos.length === 5) {
+        L.polyline(puntos, { color: 'blue' }).addTo(dibujo)
+    }
 })
